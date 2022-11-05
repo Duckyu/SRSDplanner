@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name='SRSD_iris'>
+    <include>
+      <uri>model://iris</uri>
+    </include>
+
+    <include>
+      <!--uri>model://ouster_Os0</uri-->
+      <uri>model://velodyne_VLP16</uri>
+      <pose>0.08 0 0.1 0 0 0</pose>
+    </include>
+    <joint name="velodyne_VLP16" type="fixed">
+      <child>velodyne_VLP16::base_footprint</child>
+      <parent>iris::base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <upper>0</upper>
+          <lower>0</lower>
+        </limit>
+      </axis>
+    </joint>
+  </model>
+</sdf>

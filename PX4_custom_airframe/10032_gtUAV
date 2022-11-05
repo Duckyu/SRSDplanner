@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# @name gtUAV iris SITL
+#
+# @type Quadrotor Wide
+#
+# @maintainer 
+#
+
+. ${R}etc/init.d/rc.mc_defaults
+
+set MIXER quad_w
+param set-default EKF2_AID_MASK 24
+param set-default EKF2_HGT_MODE 3

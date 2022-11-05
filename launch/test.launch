@@ -1,0 +1,63 @@
+<launch>
+
+	<!-- MAVROS SITL setup -->
+	<arg name="fcu_url" default="udp://localhost:14550@localhost:14557" />
+	<arg name="gcs_url" default="" />
+	<arg name="tgt_system" default="1" />
+	<arg name="tgt_component" default="1" />
+	<arg name="log_output" default="screen" />
+	<arg name="fcu_protocol" default="v2.0" />
+	<arg name="respawn_mavros" default="false" />
+
+	<include file="$(find mavros)/launch/node.launch">
+		<arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
+		<arg name="config_yaml" value="$(find mavros)/launch/px4_config.yaml" />
+		<arg name="fcu_url" value="$(arg fcu_url)" />
+		<arg name="gcs_url" value="$(arg gcs_url)" />
+		<arg name="tgt_system" value="$(arg tgt_system)" />
+		<arg name="tgt_component" value="$(arg tgt_component)" />
+		<arg name="log_output" value="$(arg log_output)" />
+		<arg name="fcu_protocol" value="$(arg fcu_protocol)" />
+		<arg name="respawn_mavros" default="$(arg respawn_mavros)" />
+	</include>
+
+	<!-- vehicle model and world -->
+	<arg name="est" default="ekf2"/>
+	<!--arg name="vehicle" default="iris_vision"/-->
+	<arg name="vehicle" default="iris"/>
+	<!--arg name="world" default="$(find pvc)/worlds/simple_pvc.world"/-->
+	<arg name="world" default="$(find srsd_planner)/worlds/test.world"/><!-- It contains UAV model-->
+	<env name="PX4_SIM_MODEL" value="$(arg vehicle)" />
+	<env name="PX4_ESTIMATOR" value="$(arg est)" />
+	
+
+	<!-- gazebo configs -->
+	<arg name="gui" default="true"/>
+	<arg name="use_sim_time" default="true"/>
+	<arg name="debug" default="false"/>
+	<arg name="verbose" default="false"/>
+	<arg name="paused" default="false"/>
+	<arg name="respawn_gazebo" default="false"/>
+
+	<!-- PX4 configs -->
+	<arg name="interactive" default="true"/>
+	<!-- PX4 SITL -->
+	<arg unless="$(arg interactive)" name="px4_command_arg1" value="-d"/>
+	<arg     if="$(arg interactive)" name="px4_command_arg1" value=""/>
+	<node name="sitl" pkg="px4" type="px4" output="screen"
+	args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS $(arg px4_command_arg1)" required="true"/>
+
+	<!-- Gazebo sim -->
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="gui" value="$(arg gui)"/>
+		<arg name="use_sim_time" value="$(arg use_sim_time)"/>
+		<arg name="world_name" value="$(arg world)"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+		<arg name="debug" value="$(arg debug)"/>
+		<arg name="verbose" value="$(arg verbose)"/>
+		<arg name="paused" value="$(arg paused)"/>
+		<arg name="respawn_gazebo" value="$(arg respawn_gazebo)"/>
+	</include>
+	
+	<!--node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" args="-sdf -file $(find srsd_planner)/models/SRSD_iris/SRSD_iris.sdf -model SRSD_iris -x 10 -y -10 -z 0.15 -R 0 -P 0 -Y 0"/-->
+</launch>
+

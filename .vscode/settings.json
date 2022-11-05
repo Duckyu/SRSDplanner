@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/home/duckyu/ws/catkin_ws_b/devel/lib/python3/dist-packages",
+        "/home/duckyu/ws/duck_base/devel/lib/python3/dist-packages",
+        "/home/duckyu/ws/others_ws/devel/lib/python3/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/home/duckyu/ws/catkin_ws_b/devel/lib/python3/dist-packages",
+        "/home/duckyu/ws/duck_base/devel/lib/python3/dist-packages",
+        "/home/duckyu/ws/others_ws/devel/lib/python3/dist-packages"
+    ]
+}

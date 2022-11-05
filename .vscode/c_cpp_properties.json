@@ -1,0 +1,54 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/duckyu/ws/catkin_ws_b/devel/include/**",
+        "/home/duckyu/ws/others_ws/devel/include/**",
+        "/home/duckyu/ws/duck_base/devel/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/VINS-Fusion/camera_models/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/darknet_ros/darknet_ros/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/mpl_ros/DecompROS/decomp_ros_utils/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/mpl_ros/DecompROS/DecompUtil/include/**",
+        "/home/duckyu/ws/others_ws/src/Onboard-SDK-ROS/include/**",
+        "/home/duckyu/ws/others_ws/src/eigen_checks/include/**",
+        "/home/duckyu/ws/others_ws/src/gazebo_ros_link_attacher/include/**",
+        "/home/duckyu/ws/others_ws/src/gl_depth_sim/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/LeGO-LOAM/LeGO-LOAM/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/LIO-SAM/include/**",
+        "/home/duckyu/ws/others_ws/src/minkindr/minkindr/include/**",
+        "/home/duckyu/ws/others_ws/src/minkindr_ros/minkindr_conversions/include/**",
+        "/home/duckyu/ws/duck_base/src/SMART/modviz/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/mpl_ros/motion_primitive_library/include/**",
+        "/home/duckyu/ws/duck_base/src/mpc_duck/mpc/include/**",
+        "/home/duckyu/ws/duck_base/src/mpc_duck/mpc_ros/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/mpl_ros/mpl_external_planner/include/**",
+        "/home/duckyu/ws/duck_base/src/N-CPP/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/nexus_4wd_mecanum_simulator/nexus_4wd_mecanum_gazebo/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/numpy_eigen/include/**",
+        "/home/duckyu/ws/others_ws/src/odom_predictor/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/ouster_example/ouster_client/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/ouster_example/ouster_ros/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/ouster_example/ouster_viz/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/mpl_ros/planning_ros_utils/include/**",
+        "/home/duckyu/ws/duck_base/src/px4_sitl_duck/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/realsense-ros/realsense2_camera/include/**",
+        "/home/duckyu/ws/catkin_ws_b/src/rita2020_dk/include/**",
+        "/home/duckyu/ws/others_ws/src/robot_pose_ekf/include/**",
+        "/home/duckyu/ws/others_ws/src/rock_you/include/**",
+        "/home/duckyu/ws/duck_base/src/sdf2tf/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

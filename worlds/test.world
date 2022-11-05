@@ -1,0 +1,1347 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>false</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>false</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='pvc'>
+      <pose>60 7 4.7 0 0 -1.5708</pose>
+      <static>1</static>
+      <link name='base_link'>
+        <self_collide>0</self_collide>
+        <inertial>
+          <pose>1.18779 -62.2817 -2.30526 0 -0 0</pose>
+          <mass>8.15152e+06</mass>
+          <inertia>
+            <ixx>3.50869e+09</ixx>
+            <ixy>2.00326e+08</ixy>
+            <ixz>-1.81087e+07</ixz>
+            <iyy>1.29091e+09</iyy>
+            <iyz>9.6134e+06</iyz>
+            <izz>3.46441e+09</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__back_link_collision_1'>
+          <pose>-29.244 -38.442 0.15773 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/back_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__back_sub_1_collision_2'>
+          <pose>-17.244 -40.6003 -4.7005 -1.5708 0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/back_sub_1.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__back_sub_2_collision_3'>
+          <pose>-17.244 -36.6003 -4.1905 -1.57079 0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/back_sub_2.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__front_link_collision_4'>
+          <pose>28.0452 -88.8012 -30.1996 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/front_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__big_glass_collision_5'>
+          <pose>21.5556 -64.1 -4.70046 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/big_glass.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__front_collision_6'>
+          <pose>21.5556 -77.1 -4.70046 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/front.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__right_collision_7'>
+          <pose>17.4556 -64.2 -3.70046 1.5708 -0 -3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/right.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__small_glass_collision_8'>
+          <pose>21.5556 -86.6 -4.70046 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/small_glass.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__sub_front_door_collision_9'>
+          <pose>20.5556 -86.6 -4.70046 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/sub_front_door.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__sub_main_collision_10'>
+          <pose>21.5556 -86.6 -4.70046 3.14159 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/sub_main.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__sub_right_door_collision_11'>
+          <pose>15.6556 -65.1 -3.70046 1.57079 1e-06 -1e-06</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/sub_right_door.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__main_link_collision_12'>
+          <pose>20.042 -14.504 -1.7998 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/main_link.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__back_windows_collision_13'>
+          <pose>-8.24471 -61.6004 -4.70062 -1.57079 1e-06 -1.57079</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/back_windows.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__front_door_collision_14'>
+          <pose>10.7553 -49.2254 -4.70057 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/front_door.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__front_windows_collision_15'>
+          <pose>9.75529 -61.6004 -4.70062 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/front_windows.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__large_window_1_collision_16'>
+          <pose>-19.2006 -19.8836 -0.452251 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/large_window_1.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__frame_1_collision_17'>
+          <pose>-9.24471 -31.6005 1.79949 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/frame_1.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__glass_1_collision_18'>
+          <pose>-9.24471 -31.6005 1.79949 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/glass_1.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__large_window_2_collision_19'>
+          <pose>-15.9287 -83.2131 0.570649 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/large_window_2.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__frame_2_collision_20'>
+          <pose>-9.24471 -91.6005 1.79927 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/frame_2.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__glass_2_collision_21'>
+          <pose>-9.24471 -91.6005 1.79927 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/glass_2.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__large_window_3_collision_22'>
+          <pose>1.65529 -63.7433 3.9564 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/large_window_3.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__frame_3_collision_23'>
+          <pose>10.5553 -58.1004 -4.70061 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/frame_3.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__glass_3_collision_24'>
+          <pose>9.75529 -58.1004 -4.70061 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/glass_3.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__main_collision_25'>
+          <pose>0.755287 -61.6004 -4.70062 -1e-06 1e-06 -1.57079</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/main.obj</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__right_door_collision_26'>
+          <pose>0.755287 -31.4504 -4.70051 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/right_door.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__roof_collision_27'>
+          <pose>49.996 -103.562 -15.2239 1.5708 4e-06 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/roof.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__roof_main_collision_28'>
+          <pose>-8.24471 -90.6005 7.09927 1.5708 4e-06 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/roof_main.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__roof_plate_1_collision_29'>
+          <pose>7.7825 -74.6005 7.62813 2.97644 4e-06 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/roof_plate_1.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__roof_plate_2_collision_30'>
+          <pose>7.7825 -74.6005 7.62813 2.97644 4e-06 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/roof_plate_2.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/base_link.STL</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/WoodPallet</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__back_link_visual_1'>
+          <pose>-29.244 -38.442 0.15773 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/back_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__back_sub_1_visual_2'>
+          <pose>-17.244 -40.6003 -4.7005 -1.5708 0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/back_sub_1.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__back_sub_2_visual_3'>
+          <pose>-17.244 -36.6003 -4.1905 -1.57079 0 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/Blue</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/back_sub_2.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__front_link_visual_4'>
+          <pose>28.0452 -88.8012 -30.1996 1.5708 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/front_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__big_glass_visual_5'>
+          <pose>21.5556 -64.1 -4.70046 1.5708 -0 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/BlueTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/big_glass.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__front_visual_6'>
+          <pose>21.5556 -77.1 -4.70046 1.5708 -0 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/Blue</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/front.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__right_visual_7'>
+          <pose>17.4556 -64.2 -3.70046 1.5708 -0 -3.14159</pose>
+          <material>
+            <script>
+              <name>Gazebo/Blue</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/right.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__small_glass_visual_8'>
+          <pose>21.5556 -86.6 -4.70046 1.5708 -0 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/BlueTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/small_glass.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__sub_front_door_visual_9'>
+          <pose>20.5556 -86.6 -4.70046 1.5708 -0 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/BlueTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/sub_front_door.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__sub_main_visual_10'>
+          <pose>21.5556 -86.6 -4.70046 3.14159 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/sub_main.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__sub_right_door_visual_11'>
+          <pose>15.6556 -65.1 -3.70046 1.57079 1e-06 -1e-06</pose>
+          <material>
+            <script>
+              <name>Gazebo/BlueTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/sub_right_door.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__main_link_visual_12'>
+          <pose>20.042 -14.504 -1.7998 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/main_link.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__back_windows_visual_13'>
+          <pose>-8.24471 -61.6004 -4.70062 -1.57079 1e-06 -1.57079</pose>
+          <material>
+            <script>
+              <name>Gazebo/BlueTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/back_windows.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__front_door_visual_14'>
+          <pose>10.7553 -49.2254 -4.70057 1.5708 -4e-06 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/FlatBlack</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/front_door.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__front_windows_visual_15'>
+          <pose>9.75529 -61.6004 -4.70062 1.5708 -4e-06 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/BlueTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/front_windows.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__large_window_1_visual_16'>
+          <pose>-19.2006 -19.8836 -0.452251 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/large_window_1.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__frame_1_visual_17'>
+          <pose>-9.24471 -31.6005 1.79949 1.5708 -0 0</pose>
+          <material>
+            <script>
+              <name>Gazebo/Blue</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/frame_1.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__glass_1_visual_18'>
+          <pose>-9.24471 -31.6005 1.79949 1.5708 -0 0</pose>
+          <material>
+            <script>
+              <name>Gazebo/BlueTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/glass_1.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__large_window_2_visual_19'>
+          <pose>-15.9287 -83.2131 0.570649 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/large_window_2.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__frame_2_visual_20'>
+          <pose>-9.24471 -91.6005 1.79927 1.5708 -4e-06 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/Blue</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/frame_2.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__glass_2_visual_21'>
+          <pose>-9.24471 -91.6005 1.79927 1.5708 -4e-06 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/BlueTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/glass_2.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__large_window_3_visual_22'>
+          <pose>1.65529 -63.7433 3.9564 1.5708 -4e-06 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/large_window_3.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__frame_3_visual_23'>
+          <pose>10.5553 -58.1004 -4.70061 1.5708 -4e-06 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/Blue</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/frame_3.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__glass_3_visual_24'>
+          <pose>9.75529 -58.1004 -4.70061 1.5708 -4e-06 1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/BlueTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/glass_3.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__main_visual_25'>
+          <pose>0.755287 -61.6004 -4.70062 -1e-06 1e-06 -1.57079</pose>
+          <material>
+            <script>
+              <name>Gazebo/CeilingTiled</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/main.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__right_door_visual_26'>
+          <pose>0.755287 -31.4504 -4.70051 1.5708 -0 0</pose>
+          <material>
+            <script>
+              <name>Gazebo/FlatBlack</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/right_door.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__roof_visual_27'>
+          <pose>49.996 -103.562 -15.2239 1.5708 4e-06 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/roof.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__roof_main_visual_28'>
+          <pose>-8.24471 -90.6005 7.09927 1.5708 4e-06 -1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/Blue</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/roof_main.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__roof_plate_1_visual_29'>
+          <pose>7.7825 -74.6005 7.62813 2.97644 4e-06 -1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/White</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/roof_plate_1.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__roof_plate_2_visual_30'>
+          <pose>7.7825 -74.6005 7.62813 2.97644 4e-06 -1.5708</pose>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://pvc/meshes/roof_plate_2.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <frame name='back_sub_1' attached_to='back_link'>
+        <pose>-2.15838 -4.85819 12 1.5708 -0 0</pose>
+      </frame>
+      <frame name='back_sub_1' attached_to='back_sub_1'/>
+      <frame name='back_sub_2' attached_to='back_link'>
+        <pose>1.84162 -4.34819 12 3.14159 -0 0</pose>
+      </frame>
+      <frame name='back_sub_2' attached_to='back_sub_2'/>
+      <frame name='back_link' attached_to='base_link'>
+        <pose>-29.244 -38.442 0.15773 1.5708 -0 1.5708</pose>
+      </frame>
+      <frame name='back_link' attached_to='back_link'/>
+      <frame name='big_glass' attached_to='front_link'>
+        <pose>24.7012 25.4991 -6.48956 0 -0 0</pose>
+      </frame>
+      <frame name='big_glass' attached_to='big_glass'/>
+      <frame name='front' attached_to='front_link'>
+        <pose>11.7012 25.4991 -6.48956 0 -0 0</pose>
+      </frame>
+      <frame name='front' attached_to='front'/>
+      <frame name='right' attached_to='front_link'>
+        <pose>24.6012 26.4991 -10.5896 3.14159 1.57079 3.14159</pose>
+      </frame>
+      <frame name='right' attached_to='right'/>
+      <frame name='small_glass' attached_to='front_link'>
+        <pose>2.20122 25.4991 -6.48956 0 -0 0</pose>
+      </frame>
+      <frame name='small_glass' attached_to='small_glass'/>
+      <frame name='sub_front_door' attached_to='front_link'>
+        <pose>2.20122 25.4991 -7.48956 0 -0 0</pose>
+      </frame>
+      <frame name='sub_front_door' attached_to='sub_front_door'/>
+      <frame name='sub_main' attached_to='front_link'>
+        <pose>2.20122 25.4991 -6.48956 0 -0 0</pose>
+      </frame>
+      <frame name='sub_main' attached_to='sub_main'/>
+      <frame name='sub_right_door' attached_to='front_link'>
+        <pose>23.7012 26.4991 -12.3896 -3e-06 -1.57079 3.14159</pose>
+      </frame>
+      <frame name='sub_right_door' attached_to='sub_right_door'/>
+      <frame name='front_link' attached_to='base_link'>
+        <pose>28.0452 -88.8012 -30.1996 1.5708 -0 1.5708</pose>
+      </frame>
+      <frame name='front_link' attached_to='front_link'/>
+      <frame name='back_windows' attached_to='main_link'>
+        <pose>-28.2867 -2.90065 47.0964 3.14159 -1.57079 3.14159</pose>
+      </frame>
+      <frame name='back_windows' attached_to='back_windows'/>
+      <frame name='front_door' attached_to='main_link'>
+        <pose>-9.28671 -2.90065 34.7214 3.14159 1.57079 3.14159</pose>
+      </frame>
+      <frame name='front_door' attached_to='front_door'/>
+      <frame name='front_windows' attached_to='main_link'>
+        <pose>-10.2867 -2.90065 47.0964 3.14159 1.57079 3.14159</pose>
+      </frame>
+      <frame name='front_windows' attached_to='front_windows'/>
+      <frame name='frame_1' attached_to='large_window_1'>
+        <pose>9.95586 2.25178 11.7169 0 -0 0</pose>
+      </frame>
+      <frame name='frame_1' attached_to='frame_1'/>
+      <frame name='glass_1' attached_to='large_window_1'>
+        <pose>9.95586 2.25178 11.7169 0 -0 0</pose>
+      </frame>
+      <frame name='glass_1' attached_to='glass_1'/>
+      <frame name='large_window_1' attached_to='main_link'>
+        <pose>-39.2426 1.34757 5.37956 0 -0 0</pose>
+      </frame>
+      <frame name='large_window_1' attached_to='large_window_1'/>
+      <frame name='frame_2' attached_to='large_window_2'>
+        <pose>-8.38736 1.22865 6.68403 0 -0 0</pose>
+      </frame>
+      <frame name='frame_2' attached_to='frame_2'/>
+      <frame name='glass_2' attached_to='large_window_2'>
+        <pose>-8.38736 1.22865 6.68403 0 -0 0</pose>
+      </frame>
+      <frame name='glass_2' attached_to='glass_2'/>
+      <frame name='large_window_2' attached_to='main_link'>
+        <pose>-35.9707 2.3707 68.7091 3.14159 1.57079 3.14159</pose>
+      </frame>
+      <frame name='large_window_2' attached_to='large_window_2'/>
+      <frame name='frame_3' attached_to='large_window_3'>
+        <pose>5.64287 -8.65703 8.9 0 -0 0</pose>
+      </frame>
+      <frame name='frame_3' attached_to='frame_3'/>
+      <frame name='glass_3' attached_to='large_window_3'>
+        <pose>5.64287 -8.65703 8.1 0 -0 0</pose>
+      </frame>
+      <frame name='glass_3' attached_to='glass_3'/>
+      <frame name='large_window_3' attached_to='main_link'>
+        <pose>-18.3867 5.75638 49.2393 3.14159 1.57079 3.14159</pose>
+      </frame>
+      <frame name='large_window_3' attached_to='large_window_3'/>
+      <frame name='main' attached_to='main_link'>
+        <pose>-19.2867 -2.90065 47.0964 3.14159 -1.57079 3.14159</pose>
+      </frame>
+      <frame name='main' attached_to='main'/>
+      <frame name='right_door' attached_to='main_link'>
+        <pose>-19.2867 -2.90065 16.9464 0 -0 0</pose>
+      </frame>
+      <frame name='right_door' attached_to='right_door'/>
+      <frame name='roof_main' attached_to='roof'>
+        <pose>-12.9611 22.3231 58.2407 0 -0 0</pose>
+      </frame>
+      <frame name='roof_main' attached_to='roof_main'/>
+      <frame name='roof_plate_1' attached_to='roof'>
+        <pose>-28.9611 22.8519 42.2135 1.40565 -0 0</pose>
+      </frame>
+      <frame name='roof_plate_1' attached_to='roof_plate_1'/>
+      <frame name='roof_plate_2' attached_to='roof'>
+        <pose>-28.9611 22.8519 42.2135 1.40565 -0 0</pose>
+      </frame>
+      <frame name='roof_plate_2' attached_to='roof_plate_2'/>
+      <frame name='roof' attached_to='main_link'>
+        <pose>29.954 -13.4238 89.0576 3.14159 -1.57079 3.14159</pose>
+      </frame>
+      <frame name='roof' attached_to='roof'/>
+      <static>0</static>
+      <frame name='main_link' attached_to='base_link'>
+        <pose>20.042 -14.504 -1.7998 1.5708 -0 0</pose>
+      </frame>
+      <frame name='main_link' attached_to='main_link'/>
+    </model>
+    <model name='concrete_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>200 200 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>200 200 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://concrete_plane/materials/scripts</uri>
+              <uri>model://concrete_plane/materials/textures</uri>
+              <name>vrc/concrete</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0.449721 8.27348 0 0 -0 0</pose>
+    </model>
+    <!-- UAV -->
+    <include>
+      <uri>model://SRSD_iris</uri>
+      <pose>10 -10 0.15 0 0 0</pose>
+    </include>
+    <!-- mapping boundary -->
+    <!--model name='mapping boundary'>
+      <static>true</static>
+      <link name='link'>
+        <visual name='map_visual'>
+          <geometry>
+            <box>
+              <size>90 70 20</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/YellowTransparent</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <pose>-3 8 10 0 0 0</pose>
+      </link>
+    </model-->
+  </world>
+</sdf>
