@@ -1,6 +1,7 @@
 #include <ros/ros.h>
 #include <iostream>
 #include <cmath>
+#include <math.h>
 #include <algorithm>
 #include <random>
 #include <vector>
@@ -89,6 +90,8 @@ private:
     double sensor_ver_range;
     double sensor_reliable_range;
     double sensor_angle;
+    double update_tolerance;
+    double robot_size;
     double size_depth;
 
     double map_min_x;
@@ -101,7 +104,12 @@ private:
 	geometry_msgs::Point map_max;
 
 	ros::Publisher octo_occu_pub;
+    ros::Publisher octo_free_pub;
     ros::Publisher setpoint_raw_pub;
+    ros::Publisher astar_pub;
+    ros::Publisher map_bound_pub;
+    ros::Publisher abort_pub;
+    ros::Publisher check_pub;
 
     ros::Subscriber sub_start;
 	ros::Subscriber sub_state;
@@ -144,7 +152,8 @@ private:
 	bool data_input(sensor_msgs::PointCloud2 input);
 	// bool check_free(geometry_msgs::PoseStamped point, geometry_msgs::PoseStamped end, octomap::point3d& hit_point);
     // bool check_free(geometry_msgs::PoseStamped point, int depth=0);
-    bool check_free(octomap::point3d check, int depth=0);
+    bool opti_check_free(octomap::point3d check, int depth=0);
+	bool pessi_check_free(octomap::point3d check, int depth=0);
 	
     void subs_start(const std_msgs::Empty::ConstPtr& msg);
 	void subs_sensor(const sensor_msgs::PointCloud2::ConstPtr& msg);
@@ -165,6 +174,9 @@ private:
 public:
 	ros::NodeHandle nh;
 
+    ros::Time mission_start;
+    ros::Duration mission_period;
+
     shared_ptr<octomap::OcTree> m_octree = nullptr;
 
     geometry_msgs::Point hover_point;
@@ -175,6 +187,7 @@ public:
     int path_idx = 0;
     nav_msgs::Path calculated_path;
     int now[3] = {0,0,0};
+    int prev[3] = {0,0,0};
 
     ros::Time offb_request;
 
@@ -208,15 +221,16 @@ public:
         body_t_sensor(1,3) = 0;
         body_t_sensor(2,3) = 0.1;
 
-		nh.param("/sensor_range", sensor_range, 18.0);
-		nh.param("/octomap_resolution", octomap_resolution, 0.5);
-		nh.param("/octomap_hit", octomap_hit, 0.7);
+		nh.param("/sensor_range", sensor_range, 30.0);
+		nh.param("/octomap_resolution", octomap_resolution, 0.3);
+		nh.param("/octomap_hit", octomap_hit, 0.9);
 		nh.param("/octomap_miss", octomap_miss, 0.4);
 		nh.param("/octomap_hz", octomap_hz, 10.0);
 
-		nh.param("/size_depth", size_depth, 1.0);
-		nh.param("/sensor_reliable_range", sensor_reliable_range, 10.0);
+		nh.param("/robot_size", robot_size, 0.5);
+		nh.param("/sensor_reliable_range", sensor_reliable_range, 12.0);
         nh.param("/sensor_angle", sensor_angle, 0.523599);
+        nh.param("/update_tolerance", update_tolerance, 0.523599);
 
         sensor_hor_range = sensor_reliable_range;
         sensor_ver_range = 2.0 * sensor_reliable_range * sin(sensor_angle/2.0);
@@ -226,10 +240,14 @@ public:
         start_point.y = 0;
         start_point.z = sensor_ver_range/2.0;
 
+        size_depth = floor(log2(robot_size*2.0/octomap_resolution));
         unit = octomap_resolution*pow(2, (int)size_depth);
+        // unit = octomap_resolution;
 
         hover_point = start_point;
         target = hover_point;
+
+        calculated_path.header.frame_id = "map";
 
         control_msg.coordinate_frame = mavros_msgs::PositionTarget::FRAME_LOCAL_NED;
         control_msg.type_mask = position_control_type;
@@ -259,11 +277,15 @@ public:
         m_octree -> setOccupancyThres(0.5);
 	 	m_octree -> enableChangeDetection(true);
 
-		octo_occu_pub    = nh.advertise<sensor_msgs::PointCloud2>("/srsd/occu", 10);
+		octo_occu_pub    = nh.advertise<sensor_msgs::PointCloud2>("/occu", 10);
+		octo_free_pub    = nh.advertise<sensor_msgs::PointCloud2>("/free", 10);
         setpoint_raw_pub = nh.advertise<mavros_msgs::PositionTarget>("/mavros/setpoint_raw/local", 10);
-
+        astar_pub        = nh.advertise<nav_msgs::Path>("/astar_path", 10);
+        map_bound_pub    = nh.advertise<visualization_msgs::Marker>("/map_bound", 10);
+        abort_pub    = nh.advertise<visualization_msgs::Marker>("/abort", 10);
+        check_pub        = nh.advertise<visualization_msgs::Marker>("/check", 10);
         
-        sub_start = nh.subscribe<std_msgs::Empty>("/srsd/start", 1, &srsd_planner::subs_start, this);
+        sub_start = nh.subscribe<std_msgs::Empty>("/start", 1, &srsd_planner::subs_start, this);
 		sub_sensor = nh.subscribe<sensor_msgs::PointCloud2>("/velodyne_points", 1, &srsd_planner::subs_sensor,this, ros::TransportHints().tcpNoDelay());
         sub_state = nh.subscribe<mavros_msgs::State>("/mavros/state", 1, &srsd_planner::subs_state, this);
 		sub_pose  = nh.subscribe<geometry_msgs::PoseStamped>("/mavros/local_position/pose", 1, &srsd_planner::subs_pose,this, ros::TransportHints().tcpNoDelay());
@@ -275,6 +297,8 @@ public:
 	    srsd_control_timer    = nh.createTimer(ros::Duration(1/60.0), &srsd_planner::control_timer, this); // every hz
         
         // x_priority = check_x_priority();
+        octomap::point3d start_ban(0,0,0);
+        ban_list.push_back(start_ban);
 	};
 };
 

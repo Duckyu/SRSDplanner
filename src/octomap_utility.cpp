@@ -19,7 +19,7 @@ bool srsd_planner::data_input(sensor_msgs::PointCloud2 input)
 
 	double timeoffset = fabs(curr_pose.header.stamp.toSec() - input.header.stamp.toSec());
 
-	if (input.point_step>0 && timeoffset < 0.1){
+	if (input.point_step>0 && timeoffset < update_tolerance){
 		pcl::PointCloud<pcl::PointXYZ>::Ptr cloudIn(new pcl::PointCloud<pcl::PointXYZ>());
 		*cloudIn = cloudmsg2cloud(input);
 		octomap::Pointcloud transOcto = cloud2transOctoCloud(cloudIn, map_t_sensor);
@@ -42,7 +42,7 @@ void srsd_planner::input_timer(const ros::TimerEvent& event)
 	data_input(sensor_data);
 	cvt_octo2pubpc();
 
-	std::cout << "m_octree: " << m_octree->size() << std::endl;
+	// std::cout << "m_octree: " << m_octree->size() << std::endl;
 }
 
 
@@ -132,22 +132,24 @@ octomath::Pose6D srsd_planner::cvt2octomath(geometry_msgs::PoseStamped curr_pose
 void srsd_planner::cvt_octo2pubpc()//octomap::OcTree *octree
 {
 	sensor_msgs::PointCloud2 pub_octo;
-	// sensor_msgs::PointCloud2 pub_octo_free;
+	sensor_msgs::PointCloud2 pub_octo_free;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr octo_pcl_pub(new pcl::PointCloud<pcl::PointXYZ>());
-	// pcl::PointCloud<pcl::PointXYZ>::Ptr free_octo_pcl_pub(new pcl::PointCloud<pcl::PointXYZ>());
+	pcl::PointCloud<pcl::PointXYZ>::Ptr free_octo_pcl_pub(new pcl::PointCloud<pcl::PointXYZ>());
 	// for (octomap::OcTree::iterator it=m_octree->begin(); it!=m_octree->end(); ++it){
 	for (octomap::OcTree::leaf_iterator it=m_octree->begin_leafs(); it!=m_octree->end_leafs(); ++it){
 		if(m_octree->isNodeOccupied(*it))
 		{
 			octo_pcl_pub->push_back(pcl::PointXYZ(it.getCoordinate().x(), it.getCoordinate().y(), it.getCoordinate().z()));//malloc
 		}
-		// else
-		// {
-		// 	free_octo_pcl_pub->push_back(pcl::PointXYZ(it.getCoordinate().x(), it.getCoordinate().y(), it.getCoordinate().z()));
-		// }
+		else
+		{
+			free_octo_pcl_pub->push_back(pcl::PointXYZ(it.getCoordinate().x(), it.getCoordinate().y(), it.getCoordinate().z()));
+		}
 	}
 	pub_octo = cloud2msg(*octo_pcl_pub, "map");
+	pub_octo_free = cloud2msg(*free_octo_pcl_pub, "map");
 	octo_occu_pub.publish(pub_octo);
+	octo_free_pub.publish(pub_octo_free);
 	octo_pcl_pub->clear();
 	// octo_pcl_pub.reset(new pcl::PointCloud<pcl::PointXYZ>());
 }
@@ -194,23 +196,41 @@ double srsd_planner::normalize(double a, double b, double c, double d){double su
 //   }  
 // }
 
-bool srsd_planner::check_free(octomap::point3d check, int depth){
+bool srsd_planner::opti_check_free(octomap::point3d check, int depth){
 //   octomap::point3d check(point.pose.position.x, point.pose.position.y, point.pose.position.z);
 //   OcTreeKey check_key = coordToKey(check);
 //   octomap::OcTreeNode* node = ;
   unsigned int full_depth = m_octree->getTreeDepth();
   auto *node = m_octree->search(check, full_depth-depth);
+//   auto *node = m_octree->search(check);
   if (node){
 	// #pragma omp parallel
 	return !m_octree->isNodeOccupied(node);
   }
   else{
-	return false; //unknown
+	// return false; //unknown //pessimistic
+	return true; //unknown //optimistic
+  }  
+}
+bool srsd_planner::pessi_check_free(octomap::point3d check, int depth){
+//   octomap::point3d check(point.pose.position.x, point.pose.position.y, point.pose.position.z);
+//   OcTreeKey check_key = coordToKey(check);
+//   octomap::OcTreeNode* node = ;
+  unsigned int full_depth = m_octree->getTreeDepth();
+  auto *node = m_octree->search(check, full_depth-depth);
+//   auto *node = m_octree->search(check);
+  if (node){
+	// #pragma omp parallel
+	return !m_octree->isNodeOccupied(node);
+  }
+  else{
+	return false; //unknown //pessimistic
+	// return true; //unknown //optimistic
   }  
 }
 
 
-void srsd_planner::subs_start(const std_msgs::Empty::ConstPtr& msg){start_flag = true; require_target = true; hover_flag = false; ROS_INFO("start exploration");}
+void srsd_planner::subs_start(const std_msgs::Empty::ConstPtr& msg){start_flag = true; require_target = true; hover_flag = false; ROS_INFO("start exploration");mission_start = ros::Time::now();}
 void srsd_planner::subs_sensor(const sensor_msgs::PointCloud2::ConstPtr& msg){sensor_data = *msg;}
 void srsd_planner::subs_state(const mavros_msgs::State::ConstPtr& msg){armed_flag = msg->armed; offb_flag = (msg->mode == mavros_msgs::State::MODE_PX4_OFFBOARD);}
 void srsd_planner::subs_pose(const geometry_msgs::PoseStamped::ConstPtr& msg){

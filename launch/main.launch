@@ -1,0 +1,39 @@
+<launch>
+	<!-- algorithm param -->
+	<arg name="sensor_range" default="30.0" />
+	<arg name="octomap_resolution" default="0.3" />
+	<arg name="octomap_hit" default="0.8" />
+	<arg name="octomap_miss" default="0.4" />
+	<arg name="octomap_hz" default="10.0" />
+	<arg name="robot_size" default="0.5" />
+	<arg name="sensor_reliable_range" default="15.0" />
+	<arg name="sensor_angle" default="0.523599" /><!-- 0.523599-->>
+	<arg name="update_tolerance" default="0.1" />
+	
+	<!-- map bound -->
+	<arg name="map_min_x" default="-5.0" /><!---58.0 -->
+	<arg name="map_min_y" default="-5.0" /><!---17.0 -->
+	<arg name="map_min_z" default="1.0" />  <!--0.0" -->
+	<arg name="map_max_x" default="65.0" /> <!--32.0 -->
+	<arg name="map_max_y" default="20.0" /> <!--53.0 -->
+	<arg name="map_max_z" default="25.0" /> <!--20.0 -->
+	
+	<param name="sensor_range" value="$(arg sensor_range)" />
+	<param name="octomap_resolution" value="$(arg octomap_resolution)" />
+	<param name="octomap_hit" value="$(arg octomap_hit)" />
+	<param name="octomap_miss" value="$(arg octomap_miss)" />
+	<param name="octomap_hz" value="$(arg octomap_hz)" />
+	<param name="robot_size" value="$(arg robot_size)" />
+	<param name="sensor_reliable_range" value="$(arg sensor_reliable_range)" />
+	<param name="sensor_angle" value="$(arg sensor_angle)" />
+	<param name="update_tolerance" value="$(arg update_tolerance)" />
+	<param name="map_min_x" value="$(arg map_min_x)" />
+	<param name="map_min_y" value="$(arg map_min_y)" />
+	<param name="map_min_z" value="$(arg map_min_z)" />
+	<param name="map_max_x" value="$(arg map_max_x)" />
+	<param name="map_max_y" value="$(arg map_max_y)" />
+	<param name="map_max_z" value="$(arg map_max_z)" />
+
+	<node name="main" pkg="srsd_planner" type="main" output="screen"/>
+</launch>
+
