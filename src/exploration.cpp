@@ -65,6 +65,8 @@ bool srsd_planner::astar(octomap::point3d start, octomap::point3d end, nav_msgs:
     bound_max.y() = max(end.y(),start.y())+dist/2.0;
     bound_max.z() = max(end.z(),start.z())+dist/2.0;
 
+    if(bound_min.z() < map_min.z){bound_min.z() = map_min.z;}
+
     cout << "bound_min: (" << bound_min.x() << ", " << bound_min.y() << ", " << bound_min.z() << ")" << endl;
     cout << "bound_max: (" << bound_max.x() << ", " << bound_max.y() << ", " << bound_max.z() << ")" << endl;
     // vector<int, int, int> key;
@@ -351,6 +353,8 @@ void srsd_planner::planner_timer(const ros::TimerEvent& event)
     if(require_target && start_flag)
     {
         int abort = 0;
+        vector<octomap::point3d> pre_banned_goal;
+
         // #pragma omp for
         for(int i =0; i<6;i++){
 
@@ -359,6 +363,8 @@ void srsd_planner::planner_timer(const ros::TimerEvent& event)
             double sec_ver_size = sensor_ver_range;//
 
             octomap::point3d start(curr_pose.pose.position.x,curr_pose.pose.position.y,curr_pose.pose.position.z);
+            // octomap::point3d start(start_point.x,start_point.y,start_point.z);
+            
             octomap::point3d temp_end(start_point.x,start_point.y,start_point.z);
             temp_end.x() += now[0]*sec_hor_size;
             temp_end.y() += now[1]*sec_hor_size;
@@ -408,14 +414,18 @@ void srsd_planner::planner_timer(const ros::TimerEvent& event)
             check_pub.publish(check_marker);
 
             const octomap::point3d checker(current[0],current[1],current[2]);
-            auto it = find(ban_list.begin(),ban_list.end(),checker);
+            auto pre_it = find(pre_ban_list.begin(),pre_ban_list.end(),checker);//pre_banned_goal need to be updated
+            auto fianl_it = find(final_ban_list.begin(),final_ban_list.end(),checker);
             if(temp_end.x()>map_min.x &&
                temp_end.y()>map_min.y &&
                temp_end.z()>map_min.z &&
                temp_end.x()<map_max.x &&
                temp_end.y()<map_max.y &&
                temp_end.z()<map_max.z &&
-               it == ban_list.end()){
+               fianl_it == final_ban_list.end()){
+                octomap::point3d temp_ban(current[0],current[1],current[2]);
+                pre_ban_list.push_back(temp_ban);
+                
                 if(astar(start, temp_end, calculated_path)){
                     prev[0] = now[0];
                     prev[1] = now[1];
@@ -423,9 +433,6 @@ void srsd_planner::planner_timer(const ros::TimerEvent& event)
                     now[0] = current[0];
                     now[1] = current[1];
                     now[2] = current[2];
-                    octomap::point3d temp_ban(current[0],current[1],current[2]);
-                    ban_list.push_back(temp_ban);
-                    octomap::point3d start(now[0],now[1],now[2]);
                     require_target = false;
                     astar_pub.publish(calculated_path);
                     break;
@@ -466,9 +473,7 @@ void srsd_planner::planner_timer(const ros::TimerEvent& event)
                 }
             }
             else{
-                octomap::point3d temp_ban(current[0],current[1],current[2]);
-                ban_list.push_back(temp_ban);
-                ROS_ERROR("out of map boundary!");
+                ROS_ERROR("out of map boundary or banned!");
                 abort++;
                 visualization_msgs::Marker check_marker;
                 check_marker.header.frame_id = "map";
@@ -558,7 +563,7 @@ void srsd_planner::control_timer(const ros::TimerEvent& event)
             control_msg.type_mask = position_control_type;
             control_msg.position = hover_point;
             ROS_INFO_ONCE("hover");
-            cout << "require_target: "<< require_target << ", "<<"end_flag: "<< end_flag << ", "<<"start_flag: "<< start_flag << endl;
+            // cout << "require_target: "<< require_target << ", "<<"end_flag: "<< end_flag << ", "<<"start_flag: "<< start_flag << endl;
 
         }
         else
@@ -582,6 +587,7 @@ void srsd_planner::control_timer(const ros::TimerEvent& event)
                     now[3] = prev[3];
                     require_target = true;
                     cout << "collision checked during control" << endl;
+                    path_idx = 0;
                 }
             }
             else{
@@ -589,6 +595,8 @@ void srsd_planner::control_timer(const ros::TimerEvent& event)
                 if(path_idx == calculated_path.poses.size()){
                     require_target = true;
                     path_idx = 0;
+                    octomap::point3d temp_ban(now[0],now[1],now[2]);
+                    pre_ban_list.push_back(temp_ban);
                     // ROS_INFO_ONCE("require new path");
                 }
                 else{

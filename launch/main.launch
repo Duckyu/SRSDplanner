@@ -6,17 +6,17 @@
 	<arg name="octomap_miss" default="0.4" />
 	<arg name="octomap_hz" default="10.0" />
 	<arg name="robot_size" default="0.5" />
-	<arg name="sensor_reliable_range" default="15.0" />
+	<arg name="sensor_reliable_range" default="20.0" />
 	<arg name="sensor_angle" default="0.523599" /><!-- 0.523599-->>
-	<arg name="update_tolerance" default="0.1" />
+	<arg name="update_tolerance" default="0.02" />
 	
 	<!-- map bound -->
-	<arg name="map_min_x" default="-5.0" /><!---58.0 -->
-	<arg name="map_min_y" default="-5.0" /><!---17.0 -->
-	<arg name="map_min_z" default="1.0" />  <!--0.0" -->
-	<arg name="map_max_x" default="65.0" /> <!--32.0 -->
-	<arg name="map_max_y" default="20.0" /> <!--53.0 -->
-	<arg name="map_max_z" default="25.0" /> <!--20.0 -->
+	<arg name="map_min_x" default="-58.0" /><!---5.0 -->
+	<arg name="map_min_y" default="-17.0" /><!---5.0 -->
+	<arg name="map_min_z" default= "0.0" />  <!--1.0" -->
+	<arg name="map_max_x" default="32.0"  /> <!--65.0-->
+	<arg name="map_max_y" default="53.0"  /> <!--20.0-->
+	<arg name="map_max_z" default="20.0"  /> <!--25.0-->
 	
 	<param name="sensor_range" value="$(arg sensor_range)" />
 	<param name="octomap_resolution" value="$(arg octomap_resolution)" />
@@ -35,5 +35,6 @@
 	<param name="map_max_z" value="$(arg map_max_z)" />
 
 	<node name="main" pkg="srsd_planner" type="main" output="screen"/>
+	<node pkg="tf2_ros" type="static_transform_publisher" name="velodyne_link_broadcaster" args="0.08 0 0.01 0 0 0 1 base_link velodyne" />
 </launch>
 

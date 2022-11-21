@@ -151,6 +151,7 @@ void srsd_planner::cvt_octo2pubpc()//octomap::OcTree *octree
 	octo_occu_pub.publish(pub_octo);
 	octo_free_pub.publish(pub_octo_free);
 	octo_pcl_pub->clear();
+	free_octo_pcl_pub->clear();
 	// octo_pcl_pub.reset(new pcl::PointCloud<pcl::PointXYZ>());
 }
 

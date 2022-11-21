@@ -1,0 +1,52 @@
+<launch>	
+	<!-- Usage options -->
+	<param name="use_free_ray"        value="false" />
+	<param name="sensor_type"         value="0" /><!--0: LiDAR-->
+	<param name="robot_type"          value="0" /><!--0: Pixhawk, 1: DJI-->
+	<param name="lidar_topic"         value="/velodyne_points" />
+	<!-- <param name="lidar_topic"         value="/ouster/points" /> -->
+	<param name="pose_topic"         value="/mavros/local_position/pose" />
+	<!-- <param name="pose_topic"         value="/dji_osdk_ros/local_odom" /> -->
+	
+    <!-- sensor configuration -->
+    <!-- Velodyne VLP16 -->
+	<param name="sensor_ring"         value="16" />
+	<param name="sensor_samples"      value="1875" />
+	<param name="sensor_vert_min"     value="-0.261799" />
+	<param name="sensor_vert_max"     value="0.261799" />
+	<param name="sensor_hori_min"     value="-3.141592" />
+	<param name="sensor_hori_max"     value="3.141592" />
+	<param name="min_sensor_range"    value="0.5" />
+	<param name="max_sensor_range"    value="100.0" />
+    <rosparam param="/ring_angle_map">
+        [-0.261799,  0.017453, -0.226893,  0.052360,
+         -0.191986,  0.087266, -0.157080,  0.122173,
+         -0.122173,  0.157080, -0.087266,  0.191986,
+         -0.052360,  0.226893, -0.017453,  0.261799]
+    </rosparam> <!-- In [rad], ID from 0 to sensor_ring-1 velodyne-->
+	<rosparam param="/free_ray_ring">
+        [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    </rosparam>
+
+	<!-- octomap param -->
+	<param name="update_sensor_range" value="30.0" />
+	<param name="octomap_resolution"  value="0.3" />
+	<param name="octomap_hit"         value="0.9" /><!-- closer to 0.5, octomap does not update occupied cell-->
+	<param name="octomap_miss"        value="0.45" /><!-- closer to 0.5, octomap does not update free cell-->
+	<param name="octomap_thresh"      value="0.5" />
+	<param name="octomap_hz"          value="20.0" />
+	<param name="update_tolerance"    value="0.1" />
+	<param name="input_log"           value="true" />
+    
+
+	<!-- octomap bound -->
+	<param name="map_min_x" value="-58.0" /><!---5.0 -->
+	<param name="map_min_y" value="-17.0" /><!---5.0 -->
+	<param name="map_min_z" value="0.0" />  <!--1.0 -->
+	<param name="map_max_x" value="32.0" />  <!--65.0-->
+	<param name="map_max_y" value="53.0" />  <!--20.0-->
+	<param name="map_max_z" value="20.0" />  <!--25.0-->
+
+	<node name="octomap_only" pkg="srsd_planner" type="octomap_only" output="screen" launch-prefix="gdb -ex run --args"/>
+	<node pkg="tf2_ros" type="static_transform_publisher" name="velodyne_link_broadcaster" args="0.08 0 0.01 0 0 0 1 base_link velodyne" />
+</launch>

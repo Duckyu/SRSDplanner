@@ -183,7 +183,8 @@ public:
     geometry_msgs::Point start_point;
 
     // bool x_priority;
-    vector<octomap::point3d> ban_list;
+    vector<octomap::point3d> pre_ban_list;
+    vector<octomap::point3d> final_ban_list;
     int path_idx = 0;
     nav_msgs::Path calculated_path;
     int now[3] = {0,0,0};
@@ -230,14 +231,14 @@ public:
 		nh.param("/robot_size", robot_size, 0.5);
 		nh.param("/sensor_reliable_range", sensor_reliable_range, 12.0);
         nh.param("/sensor_angle", sensor_angle, 0.523599);
-        nh.param("/update_tolerance", update_tolerance, 0.523599);
+        nh.param("/update_tolerance", update_tolerance, 0.02);
 
         sensor_hor_range = sensor_reliable_range;
         sensor_ver_range = 2.0 * sensor_reliable_range * sin(sensor_angle/2.0);
         ROS_INFO("sensor_ver_range: %lf",sensor_ver_range);
 
-        start_point.x = 0;
-        start_point.y = 0;
+        start_point.x = curr_pose.pose.position.x;
+        start_point.y = curr_pose.pose.position.y;
         start_point.z = sensor_ver_range/2.0;
 
         size_depth = floor(log2(robot_size*2.0/octomap_resolution));
@@ -298,7 +299,7 @@ public:
         
         // x_priority = check_x_priority();
         octomap::point3d start_ban(0,0,0);
-        ban_list.push_back(start_ban);
+        pre_ban_list.push_back(start_ban);
 	};
 };
 

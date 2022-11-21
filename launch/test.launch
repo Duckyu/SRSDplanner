@@ -26,6 +26,7 @@
 	<!--arg name="vehicle" default="iris_vision"/-->
 	<arg name="vehicle" default="iris"/>
 	<!--arg name="world" default="$(find pvc)/worlds/simple_pvc.world"/-->
+	<!--arg name="world" default="$(find px4_sitl_duck)/worlds/urban_after_earthquake.world"/-->
 	<!--arg name="world" default="$(find srsd_planner)/worlds/test_deungsun.world"/--><!-- It contains UAV model-->
 	<arg name="world" default="$(find srsd_planner)/worlds/test.world"/><!-- It contains UAV model-->
 	<env name="PX4_SIM_MODEL" value="$(arg vehicle)" />
